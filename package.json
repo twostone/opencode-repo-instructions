@@ -1,0 +1,25 @@
+{
+  "name": "opencode-repo-instructions",
+  "version": "0.1.0",
+  "description": "opencode plugin that loads GitHub Copilot repository and global instructions, skills, prompts and agents",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test test/",
+    "build": "esbuild src/index.ts --bundle --format=esm --platform=node --target=node20 --external:@opencode-ai/plugin --outfile=dist/index.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "picomatch": "^4.0.7"
+  },
+  "devDependencies": {
+    "@opencode-ai/plugin": "^1.18.31",
+    "@types/node": "^22.20.3",
+    "@types/picomatch": "^4.0.3",
+    "esbuild": "^0.28.2",
+    "typescript": "^5.9.3"
+  }
+}
