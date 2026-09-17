@@ -95,9 +95,10 @@ Releases are automated with [release-please](https://github.com/googleapis/relea
 
 1. Push to `develop` with Conventional Commits (`feat:`, `fix:`, ...) — a release PR with the version bump and `CHANGELOG.md` is opened automatically.
 2. Merge the release PR — release-please creates the GitHub Release and the `vX.Y.Z` tag.
-3. The tag triggers the npm publish workflow (`.github/workflows/publish.yml`).
+3. The tag triggers the npm publish workflow (`.github/workflows/publish.yml`), which runs `npm stage publish` — the package is submitted to npm's [staged publishing](https://docs.npmjs.com/staged-publishing) area, not the live registry.
+4. A maintainer reviews and approves the staged package (2FA) via the **Staged Packages** tab on npmjs.com or `npm stage approve <stage-id>`.
 
-No manual version bumps or tags. Publishing requires the `NPM_TOKEN` repository secret.
+No manual version bumps or tags. CI needs the `NPM_TOKEN` repository secret. Note: the very first version had to go out with a plain `npm publish`, because staged publishing only works for packages that already exist on the registry.
 
 ## Example
 

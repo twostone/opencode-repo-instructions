@@ -11,9 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Node 26 required: `npm stage publish` needs npm >= 11.15 (Node 22 ships npm 10)
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 26
           registry-url: https://registry.npmjs.org
 
       - run: npm ci

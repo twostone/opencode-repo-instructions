@@ -36,7 +36,9 @@ No linter or formatter is configured — don't assume one exists.
   `package.json` has an explicit `"files": ["dist"]`. Don't remove it.
 - Releases are automated via release-please (`.github/workflows/release.yml`): push to
   `develop` → merge the release PR → GitHub Release + tag `vX.Y.Z`; the tag then triggers
-  npm publish (`.github/workflows/publish.yml`). Requires the repo secret `NPM_TOKEN`.
+  `publish.yml`, which runs `npm stage publish` (npm staged publishing) — a maintainer
+  approves via npmjs.com or `npm stage approve` (2FA). Requires the repo secret `NPM_TOKEN`.
+  CI needs Node 26+ (npm ≥ 11.15 for `npm stage`).
 
 ## Conventions
 
