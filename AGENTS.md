@@ -34,11 +34,12 @@ No linter or formatter is configured — don't assume one exists.
   fixture dir, no env setup.
 - `dist/` is gitignored but must stay in the npm tarball — that only works because
   `package.json` has an explicit `"files": ["dist"]`. Don't remove it.
-- Releases are automated via release-please (`.github/workflows/release.yml`): push to
-  `develop` → merge the release PR → GitHub Release + tag `vX.Y.Z`; the tag then triggers
-  `publish.yml`, which runs `npm stage publish` (npm staged publishing) — a maintainer
-  approves via npmjs.com or `npm stage approve` (2FA). Requires the repo secret `NPM_TOKEN`.
-  CI needs Node 26+ (npm ≥ 11.15 for `npm stage`).
+- Releases are automated in one workflow (`.github/workflows/release.yml`): push to
+  `develop` → merge the release PR → release-please creates the GitHub Release + tag
+  `vX.Y.Z`, and the same run then builds and runs `npm stage publish` (gated on
+  release-please's `release_created` output) — a maintainer approves via npmjs.com or
+  `npm stage approve` (2FA). Requires the repo secret `NPM_TOKEN`; CI needs Node 26+
+  (npm ≥ 11.15 for `npm stage`).
 
 ## Conventions
 

@@ -27,6 +27,21 @@ Notes:
 
 ## Installation
 
+### From npm
+
+Add the package to the `plugin` array of your `opencode.json` — opencode installs it automatically at startup (cached in `~/.cache/opencode/node_modules/`):
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["opencode-repo-instructions"]
+}
+```
+
+Project `opencode.json` → active for that repository only; global config (`~/.config/opencode/opencode.json`) → active for every repository.
+
+### Build from source
+
 The plugin is a single self-contained ES module with no runtime dependencies (picomatch and the frontmatter parser are bundled), so it can be loaded directly from the plugin directory:
 
 ```sh
@@ -55,15 +70,17 @@ The TypeScript sources run as-is on recent Node/Bun runtimes with type stripping
 
 ## Options
 
-Auto-discovered plugins from a `plugins/` directory take no options. To configure, reference the file explicitly in `opencode.json`:
+Auto-discovered plugins from a `plugins/` directory take no options. To configure, reference the plugin explicitly in `opencode.json` as a `[plugin, options]` tuple:
 
 ```json
 {
   "plugin": [
-    ["~/.config/opencode/plugins/repo-instructions.js", { "maxFileBytes": 262144 }]
+    ["opencode-repo-instructions", { "maxFileBytes": 262144 }]
   ]
 }
 ```
+
+The same works for a local file-based install: `["~/.config/opencode/plugins/repo-instructions.js", { ... }]`.
 
 | Option | Default | Description |
 | --- | --- | --- |
@@ -94,8 +111,7 @@ npm run build          # esbuild → dist/index.js (single file, node builtins e
 Releases are automated with [release-please](https://github.com/googleapis/release-please):
 
 1. Push to `develop` with Conventional Commits (`feat:`, `fix:`, ...) — a release PR with the version bump and `CHANGELOG.md` is opened automatically.
-2. Merge the release PR — release-please creates the GitHub Release and the `vX.Y.Z` tag.
-3. The tag triggers the npm publish workflow (`.github/workflows/publish.yml`), which runs `npm stage publish` — the package is submitted to npm's [staged publishing](https://docs.npmjs.com/staged-publishing) area, not the live registry.
+2. Merge the release PR — release-please creates the GitHub Release and the `vX.Y.Z` tag, and the same run then builds the package and runs `npm stage publish` — the package is submitted to npm's [staged publishing](https://docs.npmjs.com/staged-publishing) area, not the live registry.
 4. A maintainer reviews and approves the staged package (2FA) via the **Staged Packages** tab on npmjs.com or `npm stage approve <stage-id>`.
 
 No manual version bumps or tags. CI needs the `NPM_TOKEN` repository secret. Note: the very first version had to go out with a plain `npm publish`, because staged publishing only works for packages that already exist on the registry.
