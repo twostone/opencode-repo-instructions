@@ -89,6 +89,16 @@ npx tsc --noEmit       # typecheck
 npm run build          # esbuild → dist/index.js (single file, node builtins external)
 ```
 
+## Releasing
+
+Releases are automated with [release-please](https://github.com/googleapis/release-please):
+
+1. Push to `develop` with Conventional Commits (`feat:`, `fix:`, ...) — a release PR with the version bump and `CHANGELOG.md` is opened automatically.
+2. Merge the release PR — release-please creates the GitHub Release and the `vX.Y.Z` tag.
+3. The tag triggers the npm publish workflow (`.github/workflows/publish.yml`).
+
+No manual version bumps or tags. Publishing requires the `NPM_TOKEN` repository secret.
+
 ## Example
 
 Given a repository with:

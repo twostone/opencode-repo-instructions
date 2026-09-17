@@ -2,8 +2,15 @@
   "name": "opencode-repo-instructions",
   "version": "0.1.0",
   "description": "opencode plugin that loads GitHub Copilot repository and global instructions, skills, prompts and agents",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "prepublishOnly": "npm run typecheck && npm run build",
     "test": "node --test test/",
     "build": "esbuild src/index.ts --bundle --format=esm --platform=node --target=node20 --external:@opencode-ai/plugin --outfile=dist/index.js",
     "typecheck": "tsc --noEmit"
