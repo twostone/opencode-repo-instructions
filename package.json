@@ -1,6 +1,6 @@
 {
   "name": "opencode-repo-instructions",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "opencode plugin that loads GitHub Copilot repository and global instructions, skills, prompts and agents",
   "main": "./dist/index.js",
   "exports": {
