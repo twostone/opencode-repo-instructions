@@ -29,7 +29,17 @@ Notes:
 
 ### From npm
 
-Add the package to the `plugin` array of your `opencode.json` — opencode installs it automatically at startup (cached in `~/.cache/opencode/node_modules/`):
+Install it directly from the npm registry with the opencode CLI — this installs the package and updates your config for you:
+
+```sh
+# project-scoped — updates ./opencode.json
+opencode plugin opencode-repo-instructions
+
+# global — updates ~/.config/opencode/opencode.json
+opencode plugin -g opencode-repo-instructions
+```
+
+Or add the package to the `plugin` array of your `opencode.json` — opencode installs it automatically at startup (cached in `~/.cache/opencode/node_modules/`):
 
 ```json
 {
