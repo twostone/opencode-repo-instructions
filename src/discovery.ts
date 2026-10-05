@@ -28,6 +28,7 @@ export interface CommandDef {
 
 export interface AgentDef {
   name: string
+  source: "repo" | "global"
   description?: string
   prompt: string
 }
@@ -169,7 +170,7 @@ async function loadAgentDir(dir: string, tag: string, loader: Loader): Promise<v
     const fallback = base.replace(/\.agent\.md$/i, "").replace(/\.md$/i, "")
     const name = typeof frontmatter.name === "string" && frontmatter.name !== "" ? frontmatter.name : fallback
     const description = typeof frontmatter.description === "string" ? frontmatter.description : undefined
-    loader.out.agents.push({ name: sanitizeName(name), description, prompt })
+    loader.out.agents.push({ name: sanitizeName(name), source: tag.startsWith("global") ? "global" : "repo", description, prompt })
   }
 }
 
