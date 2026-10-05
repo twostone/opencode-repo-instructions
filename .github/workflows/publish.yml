@@ -1,0 +1,29 @@
+name: Publish to npm (manual)
+
+# Recovery path only: the normal publish happens inside the Release workflow
+# (see release.yml) when a release is created. If that step fails after the
+# release/tag already exists, re-run it here via workflow dispatch on the
+# release tag (or locally: npm ci && npm test && npm run build && npm stage publish).
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Node 26 required: `npm stage publish` needs npm >= 11.15 (Node 22 ships npm 10)
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          registry-url: https://registry.npmjs.org
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
+      - run: npm stage publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
