@@ -12,7 +12,7 @@
   "scripts": {
     "prepublishOnly": "npm run typecheck && npm run build",
     "test": "node --test test/*.test.ts",
-    "build": "esbuild src/index.ts --bundle --format=esm --platform=node --target=node20 --external:@opencode-ai/plugin --outfile=dist/index.js",
+    "build": "esbuild src/index.ts --bundle --format=esm --platform=node --target=node20 --external:@opencode/plugin --outfile=dist/index.js",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [],
@@ -23,7 +23,7 @@
     "picomatch": "^4.0.7"
   },
   "devDependencies": {
-    "@opencode-ai/plugin": "^1.18.31",
+    "@opencode/plugin": "^2.0.23",
     "@types/node": "^22.20.3",
     "@types/picomatch": "^4.0.3",
     "esbuild": "^0.28.2",
