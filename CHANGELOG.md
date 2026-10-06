@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/twostone/opencode-repo-instructions/compare/v2.0.0...v2.0.1) (2026-10-06)
+
+
+### Bug Fixes
+
+* ship @opencode/plugin as a runtime dependency ([7aceb22](https://github.com/twostone/opencode-repo-instructions/commit/7aceb22e944de34919abc66ff6391c544b71128c))
+
 ## [2.0.0](https://github.com/twostone/opencode-repo-instructions/compare/v1.0.0...v2.0.0) (2026-10-05)
 
 
